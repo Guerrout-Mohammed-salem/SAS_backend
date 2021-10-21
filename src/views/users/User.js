@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   CCard,
   CCardBody,
@@ -9,10 +9,12 @@ import {
   CButton,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
+import { user as usr } from "src/global";
 
 import usersData from "./UsersData";
 
 const User = ({ match }) => {
+  const [search, setSearch] = useState("");
   const user = usersData.find((user) => user.id.toString() === match.params.id);
   const userDetails = user
     ? Object.entries(user)
@@ -56,7 +58,16 @@ const User = ({ match }) => {
                     })}
                   </tbody>
                 </table>
-                <CButton color="success">View card</CButton>
+                {usr ? (
+                  <CRow>
+                    <CCol md={2}>
+                      <CButton color="success">View card</CButton>
+                    </CCol>
+                    <CCol>
+                      <CButton color="success">Veiw all status</CButton>
+                    </CCol>
+                  </CRow>
+                ) : null}
               </CCol>
             </CRow>
           </CCardBody>

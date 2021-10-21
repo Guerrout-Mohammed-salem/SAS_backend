@@ -12,26 +12,18 @@ import {
   CInputGroup,
   CInputGroupPrepend,
   CInputGroupText,
+  CDropdown,
+  CDropdownDivider,
+  CDropdownHeader,
+  CDropdownItem,
+  CDropdownMenu,
+  CDropdownToggle,
   CInput,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
-import usersData from "./UsersData";
-import { user } from "src/global";
+import usersData from "../users/UsersData";
+import "../dashboard/dashboard.css";
 
-// const getBadge = (status) => {
-//   switch (status) {
-//     case "Active":
-//       return "success";
-//     case "Inactive":
-//       return "secondary";
-//     case "Pending":
-//       return "warning";
-//     case "Banned":
-//       return "danger";
-//     default:
-//       return "primary";
-//   }
-// };
 const getBadge = (status) => {
   switch (status) {
     case "Active":
@@ -41,7 +33,7 @@ const getBadge = (status) => {
   }
 };
 
-const Users = () => {
+const Manual_attendance = () => {
   const history = useHistory();
   const queryPage = useLocation().search.match(/page=([0-9]+)/, "");
   const currentPage = Number(queryPage && queryPage[1] ? queryPage[1] : 1);
@@ -49,12 +41,19 @@ const Users = () => {
   const [search, setSearch] = useState("");
 
   const pageChange = (newPage) => {
-    currentPage !== newPage && history.push(`/users?page=${newPage}`);
+    currentPage !== newPage &&
+      history.push(`/manual_mark_attendance?page=${newPage}`);
   };
 
   useEffect(() => {
     currentPage !== page && setPage(currentPage);
   }, [currentPage, page]);
+
+  function handleClick(e) {
+    e == "active"
+      ? console.log("active pressed!")
+      : console.log("inactive pressed!");
+  }
   return (
     <CRow>
       <CCol xl={12}>
@@ -89,22 +88,37 @@ const Users = () => {
               items={usersData}
               fields={[
                 { key: "name", _classes: "font-weight-bold" },
-                "registered",
+                // "registered",
                 "role",
                 "status",
               ]}
               hover
               striped
-              itemsPerPage={10}
+              itemsPerPage={20}
               activePage={page}
               clickableRows
-              onRowClick={(item) =>
-                user ? history.push(`/users/${item.id}`) : null
-              }
+              // onRowClick={(item) =>
+              //   user ? history.push(`/manual_mark_attendance/${item.id}`) : null
+              // }
               scopedSlots={{
                 status: (item) => (
                   <td>
-                    <CBadge color={getBadge(item.status)}>{item.status}</CBadge>
+                    <CDropdown>
+                      <CDropdownToggle>
+                        <CBadge color={getBadge(item.status)}>
+                          {item.status}
+                        </CBadge>
+                      </CDropdownToggle>
+                      <CDropdownMenu>
+                        <CDropdownItem onClick={() => handleClick("active")}>
+                          Active
+                        </CDropdownItem>
+                        <CDropdownItem onClick={() => handleClick("inactive")}>
+                          Inactive
+                        </CDropdownItem>
+                        {/* <CDropdownItem>Another Action</CDropdownItem> */}
+                      </CDropdownMenu>
+                    </CDropdown>
                   </td>
                 ),
               }}
@@ -112,7 +126,7 @@ const Users = () => {
             <CPagination
               activePage={page}
               onActivePageChange={pageChange}
-              pages={Math.round(usersData.length / 10)}
+              pages={Math.round(usersData.length / 20)}
               doubleArrows={false}
               align="center"
             />
@@ -123,4 +137,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default Manual_attendance;

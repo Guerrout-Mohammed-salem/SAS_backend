@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 
 // routes config
 import routes from "../routes";
+import { user } from "src/global";
 
 const loading = (
   <div className="pt-3 text-center">

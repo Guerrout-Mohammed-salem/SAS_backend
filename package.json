@@ -3,29 +3,19 @@
   "version": "3.2.1",
   "description": "CoreUI React Open Source Bootstrap 4 Admin Template",
   "author": {
-    "name": "CoreUI",
-    "url": "https://coreui.io",
-    "github": "https://github.com/coreui",
-    "twitter": "https://twitter.com/core_ui"
+    "name": "SAS"
   },
   "contributors": [
     {
-      "name": "CoreUI Team",
-      "url": "https://github.com/orgs/coreui/people"
+      "name": "SAS Team",
+      "url": "https://github.com/Ad019El/SAS"
     }
   ],
   "homepage": ".",
-  "copyright": "Copyright 2017-2020 creativeLabs Łukasz Holeczek",
-  "license": "MIT",
-  "private": true,
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:coreui/coreui-free-react-admin-template.git"
-  },
   "dependencies": {
     "@coreui/chartjs": "^2.0.0",
     "@coreui/coreui": "^3.4.0",
-    "@coreui/icons": "^2.0.0",
+    "@coreui/icons": "^2.1.0",
     "@coreui/icons-react": "^1.1.0",
     "@coreui/react": "^3.4.6",
     "@coreui/react-chartjs": "^1.1.0",
@@ -34,11 +24,13 @@
     "axios": "^0.23.0",
     "classnames": "^2.2.6",
     "core-js": "^3.9.1",
+    "dotenv": "^10.0.0",
     "enzyme": "^3.11.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-app-polyfill": "^2.0.0",
     "react-dom": "^17.0.2",
+    "react-qr-reader": "^2.2.1",
     "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",

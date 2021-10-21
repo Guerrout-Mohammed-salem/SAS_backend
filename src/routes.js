@@ -1,4 +1,5 @@
 import React from "react";
+import { user } from "./global";
 
 // const Toaster = React.lazy(() =>
 //   import("./views/notifications/toaster/Toaster")
@@ -58,9 +59,16 @@ import React from "react";
 // );
 // const Widgets = React.lazy(() => import("./views/widgets/Widgets"));
 const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
-const Users = React.lazy(() => import("./views/users/Users"));
+let Users = React.lazy(() => import("./views/users/Users"));
+// redirect user to dashboard if not a admin
 const User = React.lazy(() => import("./views/users/User"));
 const Profile = React.lazy(() => import("./views/profile/profile"));
+var Attendance_QR = React.lazy(() =>
+  import("src/views/attendance/Attendance_QR")
+);
+const Attendance_Manual = React.lazy(() =>
+  import("./views/attendance/Attendance_manual")
+);
 const AddnewUser = React.lazy(() =>
   import("./views/pages/register/AddnewUser")
 );
@@ -71,6 +79,18 @@ const routes = [
   { path: "/users", exact: true, name: "Users", component: Users },
   { path: "/users/:id", exact: true, name: "User Details", component: User },
   { path: "/profile", exact: true, name: "Profile", component: Profile },
+  {
+    path: "/mark_attendance_qr",
+    exact: true,
+    name: "Mark attendance QR",
+    component: Attendance_QR,
+  },
+  {
+    path: "/manual_mark_attendance",
+    exact: true,
+    name: "Manual attendance",
+    component: Attendance_Manual,
+  },
   {
     path: "/addnewuser",
     exact: true,
@@ -103,10 +123,10 @@ const routes = [
   //   path: "/buttons/button-dropdowns",
   //   name: "Dropdowns",
   //   component: ButtonDropdowns,
+  //   name: "Button Groups",
   // },
   // {
   //   path: "/buttons/button-groups",
-  //   name: "Button Groups",
   //   component: ButtonGroups,
   // },
   // {
@@ -119,6 +139,7 @@ const routes = [
   // { path: "/icons/coreui-icons", name: "CoreUI Icons", component: CoreUIIcons },
   // { path: "/icons/flags", name: "Flags", component: Flags },
   // { path: "/icons/brands", name: "Brands", component: Brands },
+  // { path: "/notifications/modals", name: "Modals", component: Modals },
   // {
   //   path: "/notifications",
   //   name: "Notifications",
@@ -127,9 +148,8 @@ const routes = [
   // },
   // { path: "/notifications/alerts", name: "Alerts", component: Alerts },
   // { path: "/notifications/badges", name: "Badges", component: Badges },
-  // { path: "/notifications/modals", name: "Modals", component: Modals },
   // { path: "/notifications/toaster", name: "Toaster", component: Toaster },
+
   // { path: "/widgets", name: "Widgets", component: Widgets },
 ];
-
 export default routes;

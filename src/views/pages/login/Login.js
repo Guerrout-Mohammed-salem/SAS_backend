@@ -22,7 +22,7 @@ import { login } from "src/Auth";
 const Login = () => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [value, SetValue] = useState([]);
+  // const [value, SetValue] = useState([]);
 
   const history = useHistory();
 
@@ -30,16 +30,16 @@ const Login = () => {
     console.log("data", username);
     console.log("hi", password);
 
-    const user = login(username, password);
-    if (!user.error) {
-      history.push({
-        pathname: "/",
-        // username: username === "admin",
-        // state1: password,
-      });
-    } else {
-      console.log("login error");
-    }
+    // const user = login(username, password);
+    // if (!user.error) {
+    history.push({
+      pathname: "/",
+      // username: username === "admin",
+      // state1: password,
+    });
+    // } else {
+    //   console.log("login error");
+    // }
     // history.push({
     //   pathname: "/",
     //   state: {
