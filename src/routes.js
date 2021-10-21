@@ -59,9 +59,12 @@ import { user } from "./global";
 // );
 // const Widgets = React.lazy(() => import("./views/widgets/Widgets"));
 const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
-let Users = React.lazy(() => import("./views/users/Users"));
+const Users = React.lazy(() => import("./views/users/Users"));
 // redirect user to dashboard if not a admin
-const User = React.lazy(() => import("./views/users/User"));
+let User = "";
+user
+  ? (User = React.lazy(() => import("./views/users/User")))
+  : (User = React.lazy(() => import("./views/users/Users")));
 const Profile = React.lazy(() => import("./views/profile/profile"));
 var Attendance_QR = React.lazy(() =>
   import("src/views/attendance/Attendance_QR")
