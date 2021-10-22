@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/views/dashboard/dashboard.css"],"names":[],"mappings":"AAAA,YACE,cACF","file":"10.fbc3a0ce.chunk.css","sourcesContent":[".card:hover {\n  cursor: pointer;\n}\n"]}
