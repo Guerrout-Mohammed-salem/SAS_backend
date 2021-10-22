@@ -6,7 +6,7 @@ const users = getEmployees().then((data) =>
     usersData.push({
       id: employee._id,
       name: `${employee.nom} ${employee.prenom}`,
-      registered: "2018/01/01",
+      registration_date: "2018/01/01",
       role: employee.poste,
       status: "Pending",
       img: `data:image/png;base64,${employee.image}`,

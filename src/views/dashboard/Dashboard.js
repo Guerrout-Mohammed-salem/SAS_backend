@@ -11,7 +11,6 @@ import {
 import CIcon from "@coreui/icons-react";
 import "./dashboard.css";
 import { useHistory } from "react-router-dom";
-import { user } from "src/global";
 import { isAdmin } from "src/Auth";
 
 const Dashboard = () => {

@@ -49,14 +49,15 @@ const User = ({ match }) => {
                 <table className="table table-striped table-hover">
                   <tbody>
                     {userDetails.map(([key, value], index) => {
-                      return (
-                        <tr key={index.toString()}>
-                          <td>{`${key}:`}</td>
-                          <td>
-                            <strong>{value}</strong>
-                          </td>
-                        </tr>
-                      );
+                      if (key != "img")
+                        return (
+                          <tr key={index.toString()}>
+                            <td>{`${key}:`}</td>
+                            <td>
+                              <strong>{value}</strong>
+                            </td>
+                          </tr>
+                        );
                     })}
                   </tbody>
                 </table>

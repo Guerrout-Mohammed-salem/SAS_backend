@@ -1,5 +1,5 @@
 import React from "react";
-import { user } from "./global";
+import { isAdmin } from "./Auth";
 
 // const Toaster = React.lazy(() =>
 //   import("./views/notifications/toaster/Toaster")
@@ -62,7 +62,7 @@ const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 const Users = React.lazy(() => import("./views/users/Users"));
 // redirect user to dashboard if not a admin
 let User = "";
-user
+isAdmin()
   ? (User = React.lazy(() => import("./views/users/User")))
   : (User = React.lazy(() => import("./views/users/Users")));
 const Profile = React.lazy(() => import("./views/profile/profile"));

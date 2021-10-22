@@ -10,14 +10,10 @@ import {
   CRow,
   CPagination,
   CInputGroup,
-  CInputGroupPrepend,
-  CInputGroupText,
   CInput,
 } from "@coreui/react";
-import CIcon from "@coreui/icons-react";
-// import usersData from "./UsersData";
-import { user } from "src/global";
-import getEmployees from "src/Auth/getEmployees";
+
+import { isAdmin } from "src/Auth";
 
 // const getBadge = (status) => {
 //   switch (status) {
@@ -101,7 +97,7 @@ const Users = () => {
               activePage={page}
               clickableRows
               onRowClick={(item) =>
-                user ? history.push(`/users/${item.id}`) : null
+                isAdmin() ? history.push(`/users/${item.id}`) : null
               }
               scopedSlots={{
                 status: (item) => (

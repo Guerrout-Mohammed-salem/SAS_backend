@@ -1,13 +1,12 @@
 import React, { lazy, useState } from "react";
 import { CRow, CImg, CCol, CCard, CCardBody, CCardHeader } from "@coreui/react";
 import QrReader from "react-qr-reader";
-import { getEmployee } from "src/Auth";
+import { getEmployee, markAttendance } from "src/Auth";
 import { API } from "src/config";
 import axios from "axios";
 
 const Attendance_QR = () => {
   //   const history = useHistory();
-  const [qrscan, setQrscan] = useState("No result");
   const [user, setUser] = useState({
     id: "no data",
     name: "no data",
@@ -17,26 +16,18 @@ const Attendance_QR = () => {
   });
   const handleScan = (data) => {
     if (data) {
-      axios
-        .get(`${API}/employee/${data}`, {
-          headers: {
-            Authorization: `Bearer ${
-              JSON.parse(localStorage.getItem("jwt")).token
-            }`,
-          },
-        })
-        .then((result) => {
-          setUser({
-            id: result.data.employee._id,
-            name: result.data.employee.nom + " " + result.data.employee.prenom,
-            role: result.data.employee.poste,
-            status: "not yet",
-            image: result.data.employee.image,
-          });
-        })
-        .catch((err) => console.log(err));
-      console.log(user.image);
-      // setQrscan(data);
+      let array = JSON.parse(localStorage.getItem("users"));
+      let result = array.find((user) => user.id == data);
+      if (result) {
+        setUser({
+          id: result.id,
+          name: result.name,
+          role: result.role,
+          status: result.status,
+          image: result.img,
+        });
+        markAttendance(data);
+      }
     }
   };
   const handleError = (err) => {
@@ -55,7 +46,7 @@ const Attendance_QR = () => {
                   delay={300}
                   onError={handleError}
                   onScan={handleScan}
-                  style={{ height: 240, width: 320 }}
+                  style={{ height: 240, width: 300 }}
                 />
               </CCol>
 
@@ -64,7 +55,7 @@ const Attendance_QR = () => {
                   <CImg
                     rounded
                     thumbnail
-                    src={`data:image/png;base64,${user.image}`}
+                    src={user.image}
                     width="150"
                     height="150"
                   />

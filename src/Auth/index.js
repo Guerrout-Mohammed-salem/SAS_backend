@@ -55,7 +55,7 @@ exports.authenticate = (data, next) => {
           usersData.push({
             id: employee._id,
             name: `${employee.nom} ${employee.prenom}`,
-            registered: "2018/01/01",
+            registered: employee.created_at.substring(0, 10),
             role: employee.poste,
             status: "Pending",
             img: `data:image/png;base64,${employee.image}`,
@@ -113,6 +113,7 @@ exports.addEmployee = (nom, prenom, email, telephone, poste, image) => {
     })
     .then((response) => {
       console.log("response: ", response);
+      refreshUsers();
     })
     .catch((err) => console.log("err: ", err));
 };
@@ -152,6 +153,15 @@ exports.getEmployee = (id) => {
     .then((result) => result)
     .catch((err) => console.log(err));
 };
+
+//mark attendance
+exports.markAttendance = (id) => {
+  return axios
+    .post(`${API}/scan/add`, { employee_id: id })
+    .then((result) => result.data)
+    .catch((err) => err);
+};
+
 //base64 String to ArrayBuffer
 function base64ToArrayBuffer(base64) {
   var binary_string = window.atob(base64);
@@ -161,4 +171,35 @@ function base64ToArrayBuffer(base64) {
     bytes[i] = binary_string.charCodeAt(i);
   }
   return bytes.buffer;
+}
+
+//refresh users in localstorage
+function refreshUsers() {
+  axios
+    .get(`${API}/employee`, {
+      headers: {
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("jwt")).token
+        }`,
+      },
+    })
+    .then((result, err) => {
+      if (err) {
+        console.log("error: ", err);
+        return;
+      }
+      var usersData = [];
+      console.log("data: ", result);
+      result.data.employees.map((employee) => {
+        usersData.push({
+          id: employee._id,
+          name: `${employee.nom} ${employee.prenom}`,
+          registered: employee.created_at.substring(0, 10),
+          role: employee.poste,
+          status: "Pending",
+          img: `data:image/png;base64,${employee.image}`,
+        });
+      });
+      localStorage.setItem("users", JSON.stringify(usersData));
+    });
 }
