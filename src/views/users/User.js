@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   CCard,
   CCardBody,
@@ -9,13 +9,12 @@ import {
   CButton,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
-import { user as usr } from "src/global";
 
-import usersData from "./UsersData";
+import { getCard } from "src/Auth";
 
 const User = ({ match }) => {
-  const [search, setSearch] = useState("");
-  const user = usersData.find((user) => user.id.toString() === match.params.id);
+  const usersData = JSON.parse(localStorage.getItem("users"));
+  const user = usersData.find((user) => user.id.toString() == match.params.id);
   const userDetails = user
     ? Object.entries(user)
     : [
@@ -27,6 +26,9 @@ const User = ({ match }) => {
         ],
       ];
 
+  function handleClick() {
+    getCard(match.params.id);
+  }
   return (
     <CRow>
       <CCol lg={12}>
@@ -38,7 +40,7 @@ const User = ({ match }) => {
                 <CImg
                   rounded
                   thumbnail
-                  src={usersData[match.params.id].img}
+                  src={user.img}
                   width="200"
                   height="200"
                 />
@@ -58,16 +60,9 @@ const User = ({ match }) => {
                     })}
                   </tbody>
                 </table>
-                {usr ? (
-                  <CRow>
-                    <CCol md={2}>
-                      <CButton color="success">View card</CButton>
-                    </CCol>
-                    <CCol>
-                      <CButton color="success">Veiw all status</CButton>
-                    </CCol>
-                  </CRow>
-                ) : null}
+                <CButton color="success" onClick={handleClick}>
+                  View card
+                </CButton>
               </CCol>
             </CRow>
           </CCardBody>

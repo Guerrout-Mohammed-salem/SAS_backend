@@ -5,7 +5,6 @@ import { useLocation } from "react-router-dom";
 
 // routes config
 import routes from "../routes";
-import { user } from "src/global";
 
 const loading = (
   <div className="pt-3 text-center">
@@ -32,13 +31,7 @@ const TheContent = () => {
                   path={route.path}
                   exact={route.exact}
                   name={route.name}
-                  render={(props) =>
-                    true ? ( // admin test
-                      <route.component {...props} />
-                    ) : (
-                      <Redirect to={{ pathname: "/login" }} />
-                    )
-                  }
+                  render={(props) => <route.component {...props} />}
                 />
               ) : null;
             })}

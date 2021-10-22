@@ -1,23 +1,42 @@
 import React, { lazy, useState } from "react";
-import {
-  CWidgetDropdown,
-  CRow,
-  CImg,
-  CCol,
-  CCard,
-  CCardBody,
-  CCardHeader,
-} from "@coreui/react";
-import CIcon from "@coreui/icons-react";
-import { useHistory } from "react-router-dom";
+import { CRow, CImg, CCol, CCard, CCardBody, CCardHeader } from "@coreui/react";
 import QrReader from "react-qr-reader";
+import { getEmployee } from "src/Auth";
+import { API } from "src/config";
+import axios from "axios";
 
 const Attendance_QR = () => {
   //   const history = useHistory();
   const [qrscan, setQrscan] = useState("No result");
+  const [user, setUser] = useState({
+    id: "no data",
+    name: "no data",
+    role: "no data",
+    status: "no data",
+    image: "",
+  });
   const handleScan = (data) => {
     if (data) {
-      setQrscan(data);
+      axios
+        .get(`${API}/employee/${data}`, {
+          headers: {
+            Authorization: `Bearer ${
+              JSON.parse(localStorage.getItem("jwt")).token
+            }`,
+          },
+        })
+        .then((result) => {
+          setUser({
+            id: result.data.employee._id,
+            name: result.data.employee.nom + " " + result.data.employee.prenom,
+            role: result.data.employee.poste,
+            status: "not yet",
+            image: result.data.employee.image,
+          });
+        })
+        .catch((err) => console.log(err));
+      console.log(user.image);
+      // setQrscan(data);
     }
   };
   const handleError = (err) => {
@@ -45,9 +64,7 @@ const Attendance_QR = () => {
                   <CImg
                     rounded
                     thumbnail
-                    src={
-                      "https://e7.pngegg.com/pngimages/297/506/png-clipart-computer-icons-user-interface-google-account-my-account-icon-miscellaneous-blue-thumbnail.png"
-                    }
+                    src={`data:image/png;base64,${user.image}`}
                     width="150"
                     height="150"
                   />
@@ -58,25 +75,25 @@ const Attendance_QR = () => {
                     <tr>
                       <td>id:</td>
                       <td>
-                        <strong>{qrscan}</strong>
+                        <strong>{user.id}</strong>
                       </td>
                     </tr>
                     <tr>
                       <td>name</td>
                       <td>
-                        <strong>{qrscan}</strong>
+                        <strong>{user.name}</strong>
                       </td>
                     </tr>
                     <tr>
                       <td>role</td>
                       <td>
-                        <strong>{qrscan}</strong>
+                        <strong>{user.role}</strong>
                       </td>
                     </tr>
                     <tr>
                       <td>status</td>
                       <td>
-                        <strong>{qrscan}</strong>
+                        <strong>{user.status}</strong>
                       </td>
                     </tr>
                   </tbody>

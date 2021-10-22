@@ -1,10 +1,9 @@
 import React from "react";
 import CIcon from "@coreui/icons-react";
-import { user } from "src/global";
+import { isAdmin } from "src/Auth";
 
-const _nav = user
+const _nav = isAdmin()
   ? [
-      /// admin
       {
         _tag: "CSidebarNavItem",
         name: "Dashboard",
@@ -43,10 +42,6 @@ const _nav = user
         to: "/manual_mark_attendance",
         icon: <CIcon name="cil-user" customClasses="c-sidebar-nav-icon" />,
       },
-      // {
-      //   _tag: "CSidebarNavDivider",
-      //   className: "m-2",
-      // },
     ]
   : [
       {

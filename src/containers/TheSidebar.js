@@ -18,6 +18,7 @@ import logos_min from "../assets/logo/SAS_LOGO_white.png";
 
 // sidebar nav config
 import navigation from "./_nav";
+import { isAdmin } from "src/Auth";
 
 const TheSidebar = () => {
   const dispatch = useDispatch();
@@ -42,17 +43,32 @@ const TheSidebar = () => {
           height={35}
         />
       </CSidebarBrand>
-      <CSidebarNav>
-        <CCreateElement
-          items={navigation}
-          components={{
-            CSidebarNavDivider,
-            CSidebarNavDropdown,
-            CSidebarNavItem,
-            CSidebarNavTitle,
-          }}
-        />
-      </CSidebarNav>
+
+      {isAdmin() ? (
+        <CSidebarNav>
+          <CCreateElement
+            items={navigation}
+            components={{
+              CSidebarNavDivider,
+              CSidebarNavDropdown,
+              CSidebarNavItem,
+              CSidebarNavTitle,
+            }}
+          />
+        </CSidebarNav>
+      ) : (
+        <CSidebarNav>
+          <CCreateElement
+            items={navigation}
+            components={{
+              CSidebarNavDivider,
+              CSidebarNavDropdown,
+              CSidebarNavItem,
+              CSidebarNavTitle,
+            }}
+          />
+        </CSidebarNav>
+      )}
       <CSidebarMinimizer className="c-d-md-down-none" />
     </CSidebar>
   );

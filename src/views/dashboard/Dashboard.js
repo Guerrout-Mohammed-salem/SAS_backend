@@ -12,6 +12,7 @@ import CIcon from "@coreui/icons-react";
 import "./dashboard.css";
 import { useHistory } from "react-router-dom";
 import { user } from "src/global";
+import { isAdmin } from "src/Auth";
 
 const Dashboard = () => {
   const history = useHistory();
@@ -22,7 +23,7 @@ const Dashboard = () => {
   }
   return (
     <CRow>
-      {user ? (
+      {isAdmin() ? (
         <>
           <CCol sm="6" lg="3">
             <CWidgetDropdown

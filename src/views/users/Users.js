@@ -15,8 +15,9 @@ import {
   CInput,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
-import usersData from "./UsersData";
+// import usersData from "./UsersData";
 import { user } from "src/global";
+import getEmployees from "src/Auth/getEmployees";
 
 // const getBadge = (status) => {
 //   switch (status) {
@@ -47,11 +48,12 @@ const Users = () => {
   const currentPage = Number(queryPage && queryPage[1] ? queryPage[1] : 1);
   const [page, setPage] = useState(currentPage);
   const [search, setSearch] = useState("");
+  const [mounted, setMounted] = useState(false);
 
+  const usersData = JSON.parse(localStorage.getItem("users"));
   const pageChange = (newPage) => {
     currentPage !== newPage && history.push(`/users?page=${newPage}`);
   };
-
   useEffect(() => {
     currentPage !== page && setPage(currentPage);
   }, [currentPage, page]);

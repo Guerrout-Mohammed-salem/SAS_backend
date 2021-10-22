@@ -20,8 +20,6 @@ import {
   CDropdownToggle,
   CInput,
 } from "@coreui/react";
-import CIcon from "@coreui/icons-react";
-import usersData from "../users/UsersData";
 import "../dashboard/dashboard.css";
 
 const getBadge = (status) => {
@@ -40,6 +38,7 @@ const Manual_attendance = () => {
   const [page, setPage] = useState(currentPage);
   const [search, setSearch] = useState("");
 
+  const usersData = JSON.parse(localStorage.getItem("users"));
   const pageChange = (newPage) => {
     currentPage !== newPage &&
       history.push(`/manual_mark_attendance?page=${newPage}`);
