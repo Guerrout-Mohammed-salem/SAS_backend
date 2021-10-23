@@ -66,7 +66,15 @@ isAdmin()
   ? (User = React.lazy(() => import("./views/users/User")))
   : (User = React.lazy(() => import("./views/users/Users")));
 const Profile = React.lazy(() => import("./views/profile/profile"));
-var Attendance_QR = React.lazy(() =>
+let Attendance_rapport = "";
+isAdmin()
+  ? (Attendance_rapport = React.lazy(() =>
+      import("./views/attendance/Attendance_rapport")
+    ))
+  : (Attendance_rapport = React.lazy(() =>
+      import("./views/dashboard/Dashboard")
+    ));
+const Attendance_QR = React.lazy(() =>
   import("src/views/attendance/Attendance_QR")
 );
 const Attendance_Manual = React.lazy(() =>
@@ -82,6 +90,12 @@ const routes = [
   { path: "/users", exact: true, name: "Users", component: Users },
   { path: "/users/:id", exact: true, name: "User Details", component: User },
   { path: "/profile", exact: true, name: "Profile", component: Profile },
+  {
+    path: "/attendance_rapport",
+    exact: true,
+    name: "Attendance Rapport",
+    component: Attendance_rapport,
+  },
   {
     path: "/mark_attendance_qr",
     exact: true,
