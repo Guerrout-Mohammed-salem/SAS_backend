@@ -29,6 +29,11 @@ const User = ({ match }) => {
   function handleClick() {
     getCard(match.params.id);
   }
+  function handleRemove() {
+    if (window.confirm("Confirm")) {
+      console.log("Removed!");
+    }
+  }
   return (
     <CRow>
       <CCol lg={12}>
@@ -61,9 +66,22 @@ const User = ({ match }) => {
                     })}
                   </tbody>
                 </table>
-                <CButton color="success" onClick={handleClick}>
-                  View card
-                </CButton>
+
+                <CRow>
+                  <CCol md={2}>
+                    <CButton color="success" onClick={handleClick}>
+                      View card
+                    </CButton>
+                  </CCol>
+                  <CCol>
+                    <CButton color="success">Veiw all status</CButton>
+                  </CCol>
+                  <CCol>
+                    <CButton color="danger" onClick={handleRemove}>
+                      Delete
+                    </CButton>
+                  </CCol>
+                </CRow>
               </CCol>
             </CRow>
           </CCardBody>
