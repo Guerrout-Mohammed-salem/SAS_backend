@@ -34,12 +34,18 @@ const _nav = isAdmin()
         _tag: "CSidebarNavItem",
         name: "Mark attendance QR",
         to: "/mark_attendance_qr",
-        icon: <CIcon name="cil-user" customClasses="c-sidebar-nav-icon" />,
+        icon: <CIcon name="cil-qr-code" customClasses="c-sidebar-nav-icon" />,
       },
       {
         _tag: "CSidebarNavItem",
         name: "Mark attendance manual",
         to: "/manual_mark_attendance",
+        icon: <CIcon name="cil-pen-alt" customClasses="c-sidebar-nav-icon" />,
+      },
+      {
+        _tag: "CSidebarNavItem",
+        name: "Attendance rapport",
+        to: "/attendance_rapport",
         icon: <CIcon name="cil-user" customClasses="c-sidebar-nav-icon" />,
       },
     ]
