@@ -63,7 +63,7 @@ const Dashboard = () => {
           <CCol sm="6" lg="3">
             <CWidgetDropdown
               className="card"
-              // onClick={() => handleOnclick("/addnewuser")}
+              onClick={() => handleOnclick("/attendance_rapport")}
               color="gradient-primary"
               header="Attendance rapport"
               text="––––––––––––––––-----------"
