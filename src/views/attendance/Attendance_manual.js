@@ -18,6 +18,7 @@ import {
   CDropdownItem,
   CDropdownMenu,
   CDropdownToggle,
+  CButton,
   CInput,
 } from "@coreui/react";
 import "../dashboard/dashboard.css";
@@ -48,11 +49,17 @@ const Manual_attendance = () => {
     currentPage !== page && setPage(currentPage);
   }, [currentPage, page]);
 
-  function handleClick(e) {
-    e == "active"
-      ? console.log("active pressed!")
-      : console.log("inactive pressed!");
+  function handleStatus(e) {
+    if (window.confirm("Confirm")) {
+      console.log(e.id);
+    }
   }
+
+  // function handleClick(e) {
+  //   e == "active"
+  //     ? console.log("active pressed!")
+  //     : console.log("inactive pressed!");
+  // }
   return (
     <CRow>
       <CCol xl={12}>
@@ -102,7 +109,15 @@ const Manual_attendance = () => {
               scopedSlots={{
                 status: (item) => (
                   <td>
-                    <CDropdown>
+                    <CButton
+                      key={item.id}
+                      disabled={false}
+                      color="primary"
+                      onClick={() => handleStatus(item)}
+                    >
+                      Check
+                    </CButton>
+                    {/* <CDropdown>
                       <CDropdownToggle>
                         <CBadge color={getBadge(item.status)}>
                           {item.status}
@@ -116,8 +131,8 @@ const Manual_attendance = () => {
                           Inactive
                         </CDropdownItem>
                         {/* <CDropdownItem>Another Action</CDropdownItem> */}
-                      </CDropdownMenu>
-                    </CDropdown>
+                    {/* </CDropdownMenu> */}
+                    {/* </CDropdown> */}
                   </td>
                 ),
               }}
